@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    restart: always
+    expose:
+      - 8000
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    environment:
+      - DJANGO_HOST=web
+    restart: always
+    volumes:
+      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template
