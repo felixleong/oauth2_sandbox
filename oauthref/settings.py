@@ -15,6 +15,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+VIRTUAL_HOST = os.getenv("VIRTUAL_HOST", "")
+
+if VIRTUAL_HOST:
+    ALLOWED_HOSTS.append(VIRTUAL_HOST)
+    ALLOWED_HOSTS.append("localhost")
+
 
 # Application definition
 

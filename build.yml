@@ -1,7 +1,7 @@
 version: "3"
-
 services:
   web:
+    platform: linux/amd64
     build: .
     command: /code/run_web.sh
     volumes:
@@ -9,15 +9,16 @@ services:
     restart: always
     expose:
       - 8000
+    env_file: secrets.env
 
   nginx:
+    platform: linux/amd64
     build:
       context: ./nginx/
       dockerfile: staging.Dockerfile
     ports:
       - 80:80
-    environment:
-      - DJANGO_HOST=web
+      - 443:443
     links:
       - web:web
     restart: always

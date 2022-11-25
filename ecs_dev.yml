@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    mem_limit: 500m
+    image: ${IMAGE_WEB}
+    command: /code/run_web.sh
+    env_file: secrets.env
+    ports:
+      - "8000:8000"
+
+  nginx:
+    mem_limit: 100m
+    image: ${IMAGE_NGINX}
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - web:web
