@@ -11,7 +11,7 @@ oauth = OAuth()
 oauth.register(
     name="ggauth_staging",
     # server_metadata_url=CONF_URL,
-    client_kwargs={"scope": "read introspection"},
+    client_kwargs={"scope": "payment introspection"},
 )
 
 
