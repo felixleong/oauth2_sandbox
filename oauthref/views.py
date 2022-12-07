@@ -11,14 +11,16 @@ oauth = OAuth()
 oauth.register(
     name="ggauth_staging",
     # server_metadata_url=CONF_URL,
-    client_kwargs={"scope": "payment introspection"},
+    client_kwargs={
+        "code_challenge_method": "S256",
+        "scope": "payment introspection",
+    },
 )
 
 
 def home(request):
     user = None
     token = request.session.get("token", {}).get("access_token", None)
-    print(f"(II) Token = {token}")
 
     if token:
         resp = requests.get(
